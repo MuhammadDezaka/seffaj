@@ -36,7 +36,23 @@ window.addEventListener('scroll', () => {
 document.addEventListener("DOMContentLoaded", function() {
     // Mencari semua container slideshow
     const slideshows = document.querySelectorAll('.slideshow-wrapper');
-    
+    const showMoreBtns = document.querySelectorAll('.show-more-btn');
+    showMoreBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Mengambil elemen <ul> (task-list) tepat di atas tombol
+            const taskList = this.previousElementSibling;
+            
+            // Toggle (tambah/hapus) class 'collapsed'
+            taskList.classList.toggle('collapsed');
+            
+            // Mengubah teks dan ikon panah
+            if (taskList.classList.contains('collapsed')) {
+                this.innerHTML = 'Show More <i class="fa-solid fa-chevron-down"></i>';
+            } else {
+                this.innerHTML = 'Show Less <i class="fa-solid fa-chevron-up"></i>';
+            }
+        });
+    });
     slideshows.forEach(wrapper => {
         const slides = wrapper.querySelectorAll('.slide');
         let currentSlide = 0;

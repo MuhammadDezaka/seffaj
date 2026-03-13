@@ -458,6 +458,59 @@ footer {
   font-size: 0.9rem;
 }
 
+/* --- ANIMASI UNDERLINE PADA NAMA --- */
+.animated-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.animated-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 5px; /* Ketebalan garis */
+    bottom: 2px;
+    left: 0;
+    background-color: var(--primary-color);
+    animation: drawLine 1s ease forwards;
+    animation-delay: 1.2s; /* Menunggu animasi teks masuk selesai */
+    border-radius: 3px;
+}
+
+@keyframes drawLine {
+    to { width: 100%; }
+}
+
+/* --- SHOW MORE / SHOW LESS TIMELINE --- */
+.task-list {
+    transition: var(--transition);
+}
+
+/* Menyembunyikan item list mulai dari urutan ke-3 (hanya tampil 2 baris) */
+.task-list.collapsed li:nth-child(n+3) {
+    display: none;
+}
+
+.show-more-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 5px 0;
+    margin-top: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.show-more-btn:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 992px) {
   .hero-text h1 {
@@ -467,7 +520,9 @@ footer {
     padding: 30px;
   }
 }
+
 @media (max-width: 768px) {
+  /* Navbar Mobile */
   .nav-links {
     display: flex;
     flex-direction: column;
@@ -502,21 +557,95 @@ footer {
     gap: 30px;
   }
 
-  /* Timeline Mobile Adjustment */
+  
+  /* 1. Perbaikan Timeline Kanan Kiri di Mobile */
   .timeline::after {
-    left: 31px;
-  }
+    left: 50%;
+    margin-left: -1.5px;
+    width: 3px;
+  } /* Garis tetap di tengah */
   .timeline-item {
-    width: 100%;
-    padding-left: 70px;
-    padding-right: 0px;
-  }
-  .timeline-item.left,
-  .timeline-item.right {
+    width: 50%;
+    padding: 0;
+    margin-bottom: 25px;
+  } /* Bagi layar jadi 2 */
+  .timeline-item.left {
     left: 0;
+    padding-right: 15px;
   }
-  .timeline-item::after,
+  .timeline-item.right {
+    left: 50%;
+    padding-left: 15px;
+  }
+
+  /* Sesuaikan bulatan timeline */
+  .timeline-item::after {
+    width: 12px;
+    height: 12px;
+    right: -6px;
+    top: 20px;
+    border-width: 3px;
+  }
   .timeline-item.right::after {
-    left: 21px;
+    left: -6px;
+  }
+
+  /* Sesuaikan isi kartu timeline agar muat di layar sempit */
+  .timeline-content {
+    padding: 15px;
+  }
+  .timeline-content h3 {
+    font-size: 0.95rem;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .timeline-content .date {
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+  }
+  .timeline-img-container {
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  .badge {
+    padding: 3px 8px;
+    font-size: 0.65rem;
+    margin-bottom: 8px;
+  }
+  .task-list li,
+  .timeline-content p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  .task-list li {
+    padding-left: 12px;
+    margin-bottom: 5px;
+  }
+  .task-list li::before {
+    font-size: 0.5rem;
+    top: 4px;
+  }
+
+  /* 2. Perbaikan Project Card Over ke Kanan */
+  .grid-container {
+    grid-template-columns: 1fr; /* Paksa card menyesuaikan 100% layar HP */
+    gap: 25px;
+    padding: 0 5px; /* Sedikit jarak aman dari tepi layar */
+  }
+  .project-card {
+    width: 100%;
+    margin: 0; /* Hapus margin pemicu overflow */
+  }
+  .slideshow-wrapper {
+    height: 180px;
+  } /* Sesuaikan tinggi gambar */
+  .project-content {
+    padding: 20px;
+  }
+  .project-content h3 {
+    font-size: 1.1rem;
+  }
+  .project-content .description {
+    font-size: 0.85rem;
   }
 }
