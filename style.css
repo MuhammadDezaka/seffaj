@@ -380,11 +380,14 @@ a {
 
 /* Projects Grid with Slideshow */
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 40px;
 }
 .project-card {
+  width: calc(50% - 20px);
+  min-width: 350px;
   background: var(--card-bg);
   border-radius: var(--border-radius);
   border: 1px solid rgba(0, 0, 0, 0.03);

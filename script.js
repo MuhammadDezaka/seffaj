@@ -47,9 +47,11 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Mengubah teks dan ikon panah
             if (taskList.classList.contains('collapsed')) {
-                this.innerHTML = 'Show More <i class="fa-solid fa-chevron-down"></i>';
+                const moreText = this.dataset.more || 'Show More';
+                this.innerHTML = `${moreText} <i class="fa-solid fa-chevron-down"></i>`;
             } else {
-                this.innerHTML = 'Show Less <i class="fa-solid fa-chevron-up"></i>';
+                const lessText = this.dataset.less || 'Show Less';
+                this.innerHTML = `${lessText} <i class="fa-solid fa-chevron-up"></i>`;
             }
         });
     });
